@@ -10,7 +10,7 @@ spec:
 
   parameters:
     - title: Service Information
-      required: [name, owner, description]
+      required: [name, owner, description, port]
       properties:
         name:
           type: string
@@ -24,6 +24,11 @@ spec:
           type: string
           title: Description
           description: Short description of the service
+        port:
+          type: number
+          title: Service Port
+          description: Port where the Flask service should run
+          default: 5000
 
     - title: Repository Location
       required: [repo]
@@ -48,9 +53,10 @@ spec:
           name: ${{ parameters.name }}
           owner: ${{ parameters.owner }}
           description: ${{ parameters.description }}
+          port: ${{ parameters.port }}
           destination:
             repo: ${{ parameters.repo }}
-            owner: rockesh7 # ramannkhanna2
+            owner: rockesh7
 
     - id: wait
       name: Wait for GitHub to index repo
@@ -62,10 +68,8 @@ spec:
       name: Publish to GitHub
       action: publish:github
       input:
-        #repoUrl: github.com?repo=${{ parameters.repo }}&owner=ramannkhanna2
         repoUrl: github.com?owner=rockesh7&repo=${{ parameters.repo }}
         repoVisibility: ${{ parameters.repoVisibility }}
-
 
     - id: register
       name: Register component in Backstage
