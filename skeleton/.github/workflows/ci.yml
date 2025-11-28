@@ -68,7 +68,8 @@ jobs:
           sudo apt-get install -y trivy
 
       - name: Run Trivy Scan
-        run: trivy image --format json --output trivy-report.json ${{ secrets.DOCKERHUB_USERNAME }}/${{ values.name }}:latest
+        # run: trivy image --format json --output trivy-report.json ${{ secrets.DOCKERHUB_USERNAME }}/${{ values.name }}:latest
+        run: trivy image --format json --output trivy-report.json ${{ secrets.DOCKERHUB_USERNAME }}/flask-microservice-repo:latest
         continue-on-error: true
 
   dast-scan:

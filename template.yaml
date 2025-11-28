@@ -70,6 +70,7 @@ spec:
       input:
         repoUrl: github.com?owner=rockesh7&repo=${{ parameters.repo }}
         repoVisibility: ${{ parameters.repoVisibility }}
+        protectDefaultBranch: false
 
     - id: register
       name: Register component in Backstage
